@@ -1,0 +1,15 @@
+#!/bin/bash
+# Create postgresql role script
+BASENAME=`basename $0`
+function USAGE(){
+	echo "Usage ${BASENAME} <role name> <role passwd>"
+}
+if [ $# -ne 2 ]; then
+	USAGE
+	exit 1
+else
+	ROLENAME=$1
+	ROLEPASS=$2
+fi
+
+psql -c "CREATE ROLE ${ROLENAME} WITH CREATEDB SUPERUSER LOGIN password '"${ROLEPASS}"' ;"
